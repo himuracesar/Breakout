@@ -1,0 +1,11 @@
+================================================================================
+Linker Errors
+Generated: 2026-10-04T23:40:41.451Z
+Total Errors: 2
+================================================================================
+
+[LNK2005] (MSVC)
+ya se definió Clear en main.obj [C:\Users\cesar\OneDrive\Documentos\Cesar\Computer Graphics\Projects\Breakout\build\Breakout.vcxproj]
+
+[LNK1169] (MSVC)
+se encontraron uno o más símbolos definidos simultáneamente [C:\Users\cesar\OneDrive\Documentos\Cesar\Computer Graphics\Projects\Breakout\build\Breakout.vcxproj]

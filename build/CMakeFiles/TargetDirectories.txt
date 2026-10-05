@@ -1,0 +1,3 @@
+C:/Users/cesar/OneDrive/Documentos/Cesar/Computer Graphics/Projects/Breakout/build/CMakeFiles/Breakout.dir
+C:/Users/cesar/OneDrive/Documentos/Cesar/Computer Graphics/Projects/Breakout/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/cesar/OneDrive/Documentos/Cesar/Computer Graphics/Projects/Breakout/build/CMakeFiles/ZERO_CHECK.dir

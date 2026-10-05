@@ -1,0 +1,10 @@
+^C:\USERS\CESAR\ONEDRIVE\DOCUMENTOS\CESAR\COMPUTER GRAPHICS\PROJECTS\BREAKOUT\BUILD\CMAKEFILES\E88B07E6F0BC067FFF16240AFB3D9F85\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/cesar/OneDrive/Documentos/Cesar/Computer Graphics/Projects/Breakout" "-BC:/Users/cesar/OneDrive/Documentos/Cesar/Computer Graphics/Projects/Breakout/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/cesar/OneDrive/Documentos/Cesar/Computer Graphics/Projects/Breakout/build/Breakout.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -1,0 +1,10 @@
+^C:\USERS\CESAR\ONEDRIVE\DOCUMENTOS\CESAR\COMPUTER GRAPHICS\PROJECTS\BREAKOUT\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/cesar/OneDrive/Documentos/Cesar/Computer Graphics/Projects/Breakout" "-BC:/Users/cesar/OneDrive/Documentos/Cesar/Computer Graphics/Projects/Breakout/build" --check-stamp-file "C:/Users/cesar/OneDrive/Documentos/Cesar/Computer Graphics/Projects/Breakout/build/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
