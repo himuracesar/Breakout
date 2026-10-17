@@ -4,6 +4,8 @@
 
 #include <stdint.h>
 
+#include<SDL3/SDL.h>
+
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
 
@@ -24,5 +26,7 @@ void Clear(uint32_t color);
  * @param color Color of the pixel.
  */
 void DrawPixel(int x, int y, uint32_t color);
+
+uint32_t GetRandomColor(int alpha);
 
 #endif

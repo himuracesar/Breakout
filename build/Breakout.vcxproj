@@ -24,7 +24,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{35E1A9B9-D0C6-3F58-8F9D-7DE80DF8A381}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
     <Platform>x64</Platform>
     <ProjectName>Breakout</ProjectName>
     <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
@@ -364,6 +364,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\cesar\OneDrive\Documentos\Cesar\Computer Graphics\Projects\Breakout\src\main.c" />
     <ClCompile Include="C:\Users\cesar\OneDrive\Documentos\Cesar\Computer Graphics\Projects\Breakout\src\graphics.c" />
     <ClCompile Include="C:\Users\cesar\OneDrive\Documentos\Cesar\Computer Graphics\Projects\Breakout\src\breakout.c" />
+    <ClCompile Include="C:\Users\cesar\OneDrive\Documentos\Cesar\Computer Graphics\Projects\Breakout\src\math.c" />
+    <ClCompile Include="C:\Users\cesar\OneDrive\Documentos\Cesar\Computer Graphics\Projects\Breakout\src\text.c" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:\Users\cesar\OneDrive\Documentos\Cesar\Computer Graphics\Projects\Breakout\build\ZERO_CHECK.vcxproj">

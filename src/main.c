@@ -31,6 +31,7 @@ int main(int argc, char* argv[]) {
     }
 
     renderer = SDL_CreateRenderer(window, NULL);
+    SDL_SetRenderVSync(renderer, 1);
     if (renderer == NULL) {
         SDL_Log("It could not create the renderer: %s \n", SDL_GetError());
         fprintf(stderr, "It could not create the renderer: %s \n", SDL_GetError());
@@ -41,12 +42,13 @@ int main(int argc, char* argv[]) {
         return EXIT_FAILURE;
     }
 
-    texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_XRGB8888, SDL_TEXTUREACCESS_STREAMING, WINDOW_WIDTH, WINDOW_HEIGHT);
+    texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, WINDOW_WIDTH, WINDOW_HEIGHT);
 
     printf("Último log de SDL: %s\n", SDL_GetError());
 
     SDL_SetTextureScaleMode(texture, SDL_SCALEMODE_NEAREST);
-    SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_NONE); 
+    //SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_NONE);
+    SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
 
     if(texture == NULL) {
         SDL_Log("It could not create the texture: %s \n", SDL_GetError());
@@ -62,28 +64,59 @@ int main(int argc, char* argv[]) {
     //----
     bool isRunning = true;
 
+    uint64_t NOW = SDL_GetPerformanceCounter();
+    uint64_t LAST = 0;
+    double deltaTime = 0.0;
+
+    uint64_t fpsTimer = SDL_GetPerformanceCounter();
+    int frameCount = 0;
+    int currentFPS = 0;
+    uint64_t freq = SDL_GetPerformanceFrequency();
+
+    srand(time(NULL));
+
     Init();
 
     while(isRunning) {
+        LAST = NOW;
+        NOW = SDL_GetPerformanceCounter();
+        
+        // Delta time en segundos (ej. 0.016s para 60 FPS)
+        deltaTime = (double)((NOW - LAST) / (double)freq);
+
+        // Protección contra saltos gigantes (ej. si minimizas la ventana)
+        if (deltaTime > 0.25) {
+            deltaTime = 0.25; 
+        }
+
         while(SDL_PollEvent(&event)) {
             if(event.type == SDL_EVENT_QUIT || (event.type == SDL_EVENT_KEY_DOWN && event.key.key == SDLK_ESCAPE)) {
                 isRunning = false;
             }
 
-            Input(&event);
+            Input(&event, deltaTime);
         }
 
-        Clear(0x00000000);
+        Clear(0xFF000000);
 
-        Update(0.016f); // Assuming 60 FPS
+        Update(deltaTime); // Assuming 60 FPS
         Render();
         
         SDL_UpdateTexture(texture, NULL, framebuffer, WINDOW_WIDTH * sizeof(uint32_t));
 
         SDL_RenderClear(renderer);
         SDL_RenderTexture(renderer, texture, NULL, NULL);
-        //SDL_RenderCopy(renderer, texture, NULL, NULL);
         SDL_RenderPresent(renderer);
+
+        frameCount++;
+        if ((NOW - fpsTimer) >= freq) {
+            currentFPS = frameCount;
+            frameCount = 0;
+            fpsTimer = NOW;
+            
+            // Imprimir FPS en la consola de depuración
+            //SDL_Log("FPS: %d | Delta Time: %.4f ms", currentFPS, deltaTime * 1000.0);
+        }
     }
 
     Release();

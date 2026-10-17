@@ -10,6 +10,12 @@
     <ClCompile Include="C:\Users\cesar\OneDrive\Documentos\Cesar\Computer Graphics\Projects\Breakout\src\breakout.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\cesar\OneDrive\Documentos\Cesar\Computer Graphics\Projects\Breakout\src\math.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\cesar\OneDrive\Documentos\Cesar\Computer Graphics\Projects\Breakout\src\text.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\cesar\OneDrive\Documentos\Cesar\Computer Graphics\Projects\Breakout\CMakeLists.txt" />

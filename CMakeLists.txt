@@ -11,6 +11,8 @@ add_executable(Breakout
     src/main.c
     src/graphics.c
     src/breakout.c
+    src/math.c
+    src/text.c
 )
 
 target_include_directories(Breakout PRIVATE ${SDL3_DIR}/include)

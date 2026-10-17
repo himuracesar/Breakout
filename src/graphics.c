@@ -29,3 +29,12 @@ void DrawPixel(int x, int y, uint32_t color) {
 
     framebuffer[y * WINDOW_WIDTH + x] = color;
 }
+
+uint32_t GetRandomColor(int alpha) {
+    uint32_t r = rand() % 256;
+    uint32_t g = rand() % 256;
+    uint32_t b = rand() % 256;
+    uint32_t a = alpha % 256;
+
+    return (a << 24) | (r << 16) | (g << 8) | b;
+}
