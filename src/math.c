@@ -24,7 +24,7 @@ float GetDistance(Vector2 a, Vector2 b) {
  * @return float Dot product of two vectors.
  */
 float Dot(Vector2 a, Vector2 b) {
-    return a.x * b.x + a.y + b.y;
+    return a.x * b.x + a.y * b.y;
 }
 
 /**
@@ -63,4 +63,16 @@ Vector2 normalized(Vector2 v) {
  */
 float length(Vector2 v)  {
     return sqrtf(powf(v.x, 2.0f) + powf(v.y, 2.0f));
+}
+
+/**
+ * Linear interpolation.
+ * 
+ * @param start Start point.
+ * @param end End point.
+ * @param amount Amount of the interpolation.
+ * @return float Result interpolation.
+ */
+float lerp(float start, float end, float amount) {
+    return start + (end - start) * amount;
 }

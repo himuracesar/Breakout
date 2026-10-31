@@ -44,8 +44,6 @@ int main(int argc, char* argv[]) {
 
     texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, WINDOW_WIDTH, WINDOW_HEIGHT);
 
-    printf("Último log de SDL: %s\n", SDL_GetError());
-
     SDL_SetTextureScaleMode(texture, SDL_SCALEMODE_NEAREST);
     //SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_NONE);
     SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
@@ -94,7 +92,7 @@ int main(int argc, char* argv[]) {
                 isRunning = false;
             }
 
-            Input(&event, deltaTime);
+            Input(&event);
         }
 
         Clear(0xFF000000);
@@ -104,8 +102,23 @@ int main(int argc, char* argv[]) {
         
         SDL_UpdateTexture(texture, NULL, framebuffer, WINDOW_WIDTH * sizeof(uint32_t));
 
+        float offsetx = 0.0f;
+        float offsety = 0.0f;
+
+        if (shakeIntensity > 0.0f) {
+            offsetx = (((float)rand() / RAND_MAX) * 2.0f - 1.0f) * shakeIntensity;
+            offsety = (((float)rand() / RAND_MAX) * 2.0f - 1.0f) * shakeIntensity;
+        }
+
+        SDL_FRect rect = {
+            offsetx, 
+            offsety, 
+            (float)WINDOW_WIDTH, 
+            (float)WINDOW_HEIGHT
+        };
+
         SDL_RenderClear(renderer);
-        SDL_RenderTexture(renderer, texture, NULL, NULL);
+        SDL_RenderTexture(renderer, texture, NULL, &rect);
         SDL_RenderPresent(renderer);
 
         frameCount++;

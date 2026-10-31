@@ -54,4 +54,14 @@ Vector2 normalized(Vector2 v);
  */
 float length(Vector2 v);
 
+/**
+ * Linear interpolation.
+ * 
+ * @param start Start point.
+ * @param end End point.
+ * @param amount Amount of the interpolation.
+ * @return float Result interpolation.
+ */
+float lerp(float start, float end, float amount);
+
 #endif

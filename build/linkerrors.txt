@@ -1,8 +1,11 @@
 ================================================================================
 Linker Errors
-Generated: 2026-10-17T04:01:02.563Z
-Total Errors: 1
+Generated: 2026-10-31T01:04:49.029Z
+Total Errors: 2
 ================================================================================
 
-[LNK1168] (MSVC)
-no se puede abrir C:\Users\cesar\OneDrive\Documentos\Cesar\Computer Graphics\Projects\Breakout\build\Debug\Breakout.exe para escritura [C:\Users\cesar\OneDrive\Documentos\Cesar\Computer Graphics\Projects\Breakout\build\Breakout.vcxproj]
+[LNK2019] (MSVC)
+símbolo externo dibujar_linea_framebuffer sin resolver al que se hace referencia en la función DrawBrickAndFissures [C:\Users\cesar\OneDrive\Documentos\Cesar\Computer Graphics\Projects\Breakout\build\Breakout.vcxproj]
+
+[LNK1120] (MSVC)
+1 externos sin resolver [C:\Users\cesar\OneDrive\Documentos\Cesar\Computer Graphics\Projects\Breakout\build\Breakout.vcxproj]

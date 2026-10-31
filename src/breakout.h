@@ -19,11 +19,14 @@
 #define BRICKS_BOARD_COLS 10
 #define MAX_PARTICLES 200
 #define MAX_EXPLOSIONS 10
+#define TRAIL_SIZE 50
+#define MAX_FISSURES 16
 
 #define DEBUG
 
 typedef struct {
   Vector2 position;
+  Vector2 direction;
   float width;
   float height;
   float speed;
@@ -32,15 +35,32 @@ typedef struct {
 typedef struct {
   Vector2 position;
   Vector2 direction;
+  Vector2 trailPositions[TRAIL_SIZE];
   float radio;
   float speed;
   float initialSpeed;
+  float radioX;
+  float radioY;
+  float elasticity;
+  int trailIndex;
+  int trailCount;
+  uint32_t color;
 } Ball;
+
+typedef struct {
+  Vector2 start;
+  Vector2 end;
+} Fissure;
 
 typedef struct {
   Vector2 position;
   uint32_t color;
   bool visible;
+  int flashFrames;
+  Fissure *fissures[MAX_FISSURES];
+  int numFissures;
+  int life;
+  int maxLife;
 } Brick;
 
 typedef struct {
@@ -58,12 +78,34 @@ typedef struct {
   int numParticlesLive;
 } Explosion;
 
-Player *player;
-Ball *ball;
-Brick *bricks[BRICKS_BOARD_ROWS][BRICKS_BOARD_COLS];
-Explosion *explosions[MAX_EXPLOSIONS];
+typedef struct {
+  Vector2 position;
+  Vector2 direction;           
+  char* text; 
+  uint32_t color;
+  float maxLife;
+  float life;  
+  float speed;
+  bool visible;
+} FloatText;
 
-int nextExplosion;
+extern Player *player;
+extern Ball *ball;
+extern Brick *bricks[BRICKS_BOARD_ROWS][BRICKS_BOARD_COLS];
+extern Explosion *explosions[MAX_EXPLOSIONS];
+extern FloatText *ftexts[MAX_EXPLOSIONS];
+
+extern int nextExplosion;
+extern int nextFloatText;
+extern int totalBricks;
+extern int points;
+extern int level;
+extern int combo;
+extern float pointsScale; 
+extern float pointsElastilicity;
+
+extern float shakeIntensity;
+extern float shakeDecay;
 
 /**
  * Initiliaze all the components of the game.
@@ -93,9 +135,9 @@ void Release();
 /**
  * Handle the input events of the game.
  *
- * @param event
+ * @param event SDL event.
  */
-void Input(SDL_Event *event, double deltaTime);
+void Input(SDL_Event *event);
 
 /**
  * Handle the ball's bouncing with the paddle (player).
@@ -138,8 +180,9 @@ void CreateBricks();
  *
  * @param row Row in the matrix.
  * @param col Column in the matrix.
+ * @param color Color of the brick.
  */
-void DrawBrick(int row, int col);
+void DrawBrick(int row, int col, uint32_t color);
 
 /**
  * Check the collision between the ball and the bricks that
@@ -147,16 +190,6 @@ void DrawBrick(int row, int col);
  *
  */
 void CheckCollisionWithBricks();
-
-/**
- * Draw a point with the radio
- *
- * @param x X coordinate
- * @param y Y coordinate
- * @param radio Radio
- * @param color Color of the point
- */
-void DrawPoint(float x, float y, float radio, uint32_t color);
 
 /**
  * Create a Random Level object
@@ -190,5 +223,44 @@ void RenderExplosions();
  * @param color Color of the particles of the explosion.
  */
 void ReinitExplosion(Vector2 position, uint32_t color);
+
+/**
+ * Active the screen shake
+ * 
+ * @param force Force to move the screen
+ */
+void activeScreenShake(float force);
+
+/**
+ * Create an float text and init all values.
+ * 
+ */
+void CreateFloatText();
+
+/**
+ * Reinit a float text.
+ * 
+ * @param text Float text.
+ * @param position Position of the text.
+ * @param color Color of the text.
+ */
+void ReinitFloatText(char* text, Vector2 position, uint32_t color);
+
+/**
+ * Update the snimation of the float text.
+ * 
+ * @param deltaTime Time betwee frames.
+ */
+void UpdateFloatText(double deltaTime);
+
+/**
+ * Draw the float text in the framebuffer.
+ * 
+ */
+void DrawFloatText();
+
+void GenerateFissure(int row, int col, int numFissures);
+
+void DrawBrickAndFissures(int row, int col);
 
 #endif
